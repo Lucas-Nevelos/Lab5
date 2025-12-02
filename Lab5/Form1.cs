@@ -24,7 +24,7 @@ namespace Lab5
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            //call the function
+            
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -36,10 +36,11 @@ namespace Lab5
         private void btnRollDice_Click(object sender, EventArgs e)
         {
             int dice1, dice2;
-            lblDice1.Text = RollDice().ToString();
-            lblDice2.Text = RollDice().ToString();
-            dice1 = Convert.ToInt32(lblDice1.Text);
-            dice2 = Convert.ToInt32(lblDice1.Text);
+            dice1 = RollDice();
+            dice2 = RollDice(); 
+            lblDice1.Text = dice1.ToString(); 
+            lblDice2.Text = dice2.ToString(); 
+            lblRollName.Text = GetName(dice1,  dice2);
             // call ftn GetName sending total and returning name
 
             //display name in label
@@ -70,41 +71,52 @@ namespace Lab5
          
         }
 
-        /* Name: GetName
-        * Sent: 1 integer (total of dice1 and dice2) 
-        * Return: string (name associated with total) 
-        * Finds the name of dice roll based on total.
-        * Use a switch statement with one return only
-        * Names: 2 = Snake Eyes
-        *        3 = Litle Joe
-        *        5 = Fever
-        *        7 = Most Common
-        *        9 = Center Field
-        *        11 = Yo-leven
-        *        12 = Boxcars
-        * Anything else = No special name*/
-
-        private string GetName(ref int dice1, int dice2)
+        private string GetName(int dice1, int dice2)
         {
             int total = dice1 + dice2;
 
             switch (total)
             {
                 case 2:
-                    lblRollName.Text = "Snake Eyes";
+                   return "Snake Eyes";
 
-                    break;
+                    
 
                 case 3:
-                    lblRollName.Text = "Little Joe";
-                    break;
+                  return "Little Joe";
+                   
 
-                case 5: 
-                    lblRollName.text
+                case 5:
+                    return "Fever";
+
+                   
+
+                case 7:
+                    return "Most Commmon";
+
+                    
+
+                case 9:
+                    return "Center field";
+
+                
+
+                case 11:
+                    return "Yo-leven";
+
+                
+
+                case 12:
+                    return "Boxcars";
+
+                    
 
 
 
-                default: return 0;
+                default:
+                    return lblRollName.Text = "No special Name";
+
+                    
             }
              
 
