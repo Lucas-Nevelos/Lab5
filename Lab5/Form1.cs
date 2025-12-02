@@ -2,7 +2,7 @@ using System.Numerics;
 
 namespace Lab5
 {
-    //nevermind i forgot to use my brain
+    //https://github.com/Lucas-Nevelos/Lab5
     public partial class Form1 : Form
     {
         public Form1()
