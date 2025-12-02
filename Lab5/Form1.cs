@@ -6,13 +6,8 @@ namespace Lab5
         {
             InitializeComponent();
         }
-        /* Name: Lucas Nevelos
-         * Date: November 2025
-         * This program rolls one dice or calculates mark stats.
-         * Link to your repo in GitHub: 
-         * */
 
-        //class-level random object
+
         Random rand = new Random();
 
         private void Form1_Load(object sender, EventArgs e)
@@ -20,16 +15,19 @@ namespace Lab5
             radOneRoll.Checked = true;
             Text += "Lucas";
 
+
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            
+
+            ClearOneRoll();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            //call the function
+
+            ClearStats();
 
         }
 
@@ -37,21 +35,21 @@ namespace Lab5
         {
             int dice1, dice2;
             dice1 = RollDice();
-            dice2 = RollDice(); 
-            lblDice1.Text = dice1.ToString(); 
-            lblDice2.Text = dice2.ToString(); 
-            lblRollName.Text = GetName(dice1,  dice2);
-            // call ftn GetName sending total and returning name
-
-            //display name in label
+            dice2 = RollDice();
+            lblDice1.Text = dice1.ToString();
+            lblDice2.Text = dice2.ToString();
+            lblRollName.Text = GetName(dice1, dice2);
 
         }
 
-        /* Name: ClearOneRoll
-        *  Sent: nothing
-        *  Return: nothing
-        *  Clear the labels */
+        private void ClearOneRoll()
+        {
 
+            lblDice1.Text = "";
+            lblDice2.Text = "";
+            lblRollName.Text = "";
+
+        }
 
         /* Name: ClearStats
         *  Sent: nothing
@@ -59,16 +57,20 @@ namespace Lab5
         *  Reset nud to minimum value, chkbox unselected, 
         *  clear labels and listbox */
 
+        private void ClearStats()
+        {
+            lblPass.Text = "";
+            lblFail.Text = "";
+            lblAverage.Text = "";
+            Convert.ToInt32(nudNumber.Value);
+        }
 
-        /* Name: RollDice
-        * Sent: nothing
-        * Return: integer (1-6)
-        * Simulates rolling one dice */
+
         private int RollDice()
         {
             int dice = rand.Next(1, 7);
             return dice;
-         
+
         }
 
         private string GetName(int dice1, int dice2)
@@ -78,61 +80,28 @@ namespace Lab5
             switch (total)
             {
                 case 2:
-                   return "Snake Eyes";
-
-                    
-
+                    return "Snake Eyes";
                 case 3:
-                  return "Little Joe";
-                   
-
+                    return "Little Joe";
                 case 5:
                     return "Fever";
-
-                   
-
                 case 7:
                     return "Most Commmon";
-
-                    
-
                 case 9:
                     return "Center field";
-
-                
-
                 case 11:
                     return "Yo-leven";
-
-                
-
                 case 12:
                     return "Boxcars";
-
-                    
-
-
-
                 default:
                     return lblRollName.Text = "No special Name";
-
-                    
             }
-             
-
-            
         }
 
 
         private void btnSwapNumbers_Click(object sender, EventArgs e)
         {
-            //call ftn DataPresent twice sending string returning boolean
-
-            //if data present in both labels, call SwapData sending both strings
-
-            //put data back into labels
-
-            //if data not present in either label display error msg
+            SwapData();
         }
 
         /* Name: DataPresent
@@ -145,12 +114,41 @@ namespace Lab5
         * Sent: 2 strings
         * Return: none 
         * Swaps the memory locations of two strings*/
+        private void SwapData()
+        {
+            string temp = lblDice1.Text;
+
+            lblDice1.Text = lblDice2.Text;
+
+            lblDice2.Text = temp;
+
+        }
+
+
+
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            //declare variables and array
+
+
+
+
+
+            lstMarks.Items.Clear();
+            int[] array = new int[Convert.ToInt32(nudNumber.Value)];
+
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = rand.Next(40, 101);
+                lstMarks.Items.Add(array[i]);
+
+
+            }
+
 
             //check if seed value
+
 
             //fill array using random number
 
@@ -161,6 +159,23 @@ namespace Lab5
 
         } // end Generate click
 
+        private void chkSeed_CheckedChanged(object sender, EventArgs e)
+        {
+            DialogResult Result = MessageBox.Show("Do you want to use a random seed value", "Confirm seed value", MessageBoxButtons.YesNo);
+
+            if (Result == DialogResult.No)
+            {
+                chkSeed.Checked = false;
+                rand = new Random();
+            }
+
+            else if (Result == DialogResult.Yes)
+            {
+                rand = new Random(1000);
+            }
+           
+        }
+
         /* Name: CalcStats
         * Sent: array and 2 integers
         * Return: average (double) 
@@ -168,5 +183,17 @@ namespace Lab5
         * Passmark is 60%
         * Calculate average and count how many marks pass and fail
         * The pass and fail values must also get returned for display*/
+        private double CalcStats(int[] array)
+        {
+            foreach (int num in array)
+            {
+                if( num >= 60)
+                {
+                    lblPass.Text = 
+                }
+            }
+            return 0.0;
+        }
+
     }
 }
