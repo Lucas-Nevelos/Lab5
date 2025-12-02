@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Lab5
 {
     public partial class Form1 : Form
@@ -62,7 +64,9 @@ namespace Lab5
             lblPass.Text = "";
             lblFail.Text = "";
             lblAverage.Text = "";
-            Convert.ToInt32(nudNumber.Value);
+            lstMarks.Text = "";
+
+            lstMarks.Items.Clear();
         }
 
 
@@ -146,14 +150,23 @@ namespace Lab5
 
             }
 
-
+            int pass = 0;
+            int fail = 0;
+           
             //check if seed value
 
 
             //fill array using random number
 
             //call CalcStats sending and returning data
+            double total = CalcStats(array, ref pass, ref fail);
 
+            lblPass.Text = pass.ToString();
+            lblFail.Text = fail.ToString();
+            lblAverage.Text = total.ToString();
+           
+
+            
             //display data sent back in labels - average, pass and fail
             // Format average always showing 2 decimal places 
 
@@ -183,16 +196,30 @@ namespace Lab5
         * Passmark is 60%
         * Calculate average and count how many marks pass and fail
         * The pass and fail values must also get returned for display*/
-        private double CalcStats(int[] array)
+        private double CalcStats(int[] array , ref int pass, ref int fail)
         {
+            double total = 0; 
+             pass = 0;
+             fail = 0;
             foreach (int num in array)
             {
+
+                total += num;
+
                 if( num >= 60)
                 {
-                    lblPass.Text = 
+                    pass++;
                 }
+
+                else
+                {
+                    fail++;
+                }
+
             }
-            return 0.0;
+            total /= array.Length;
+                return total;
+                
         }
 
     }
